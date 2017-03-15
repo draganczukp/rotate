@@ -16,12 +16,12 @@ public class Piece {
 	
 	public Piece(Vector2 pos){
 		this.pos = pos;
-		circle = new Circle(pos, 10);
+		circle = new Circle(pos, 20);
 	}
 	
 	public void draw(Graphics g){
 		g.sr.setColor(c);
-		g.sr.circle(pos.x, pos.y, 10);
+		g.sr.circle(pos.x, pos.y, 20);
 	}
 	
 	public void place(){

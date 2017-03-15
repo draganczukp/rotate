@@ -10,10 +10,10 @@ public class Board {
 	
 	public Board(Vector2 center){
 		this.center = center;
-		tl = new BoardQuarter(new Vector2(center).add(-40, -40));
-		tr = new BoardQuarter(new Vector2(center).add(40, -40));
-		bl = new BoardQuarter(new Vector2(center).add(-40, 40));
-		br = new BoardQuarter(new Vector2(center).add(40, 40));
+		tl = new BoardQuarter(new Vector2(center).add(-100, -100));
+		tr = new BoardQuarter(new Vector2(center).add(100, -100));
+		bl = new BoardQuarter(new Vector2(center).add(-100, 100));
+		br = new BoardQuarter(new Vector2(center).add(100, 100));
 	}
 	
 	public void draw(Graphics g){
@@ -21,6 +21,10 @@ public class Board {
 		tr.draw(g);
 		bl.draw(g);
 		br.draw(g);
+	}
+
+	public BoardQuarter[] getQuarters() {
+		return new BoardQuarter[]{tl,tr,bl,br};
 	}
 	
 }

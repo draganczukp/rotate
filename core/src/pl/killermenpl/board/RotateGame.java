@@ -2,9 +2,11 @@ package pl.killermenpl.board;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
@@ -19,8 +21,10 @@ public class RotateGame extends ApplicationAdapter implements InputProcessor {
 	public static Array<Piece> pieces;
 	public int playerIndex = 1;
 
-	//TODO: Add rotation and board borders
-	
+	// TODO: Add rotation
+	public static byte mode = 0;
+	private BoardQuarter selected;
+
 	@Override
 	public void create() {
 		pieces = new Array<Piece>();
@@ -32,7 +36,9 @@ public class RotateGame extends ApplicationAdapter implements InputProcessor {
 		players[1] = new Player(Color.RED);
 		currentPlayer = players[0];
 
-		Gdx.input.setInputProcessor(this);
+		InputMultiplexer inputs = new InputMultiplexer(this);
+		inputs.addProcessor(new GestureDetector(new Gestures()));
+		Gdx.input.setInputProcessor(inputs);
 	}
 
 	@Override
@@ -76,18 +82,36 @@ public class RotateGame extends ApplicationAdapter implements InputProcessor {
 		float y = Gdx.graphics.getHeight() - screenY;
 		Vector2 point = Vector2.X;
 		point.set(x, y);
-		for (Piece p : pieces) {
-			if (p.placed)
-				continue;
-			if (p.circle.contains(point)) {
-				// System.out.println(p);
-				p.place();
-				currentPlayer = players[playerIndex];
-				if (playerIndex == 1)
-					playerIndex = 0;
-				else
-					playerIndex = 1;
+		if (mode == 0) {
+			for (Piece p : pieces) {
+				if (p.placed)
+					continue;
+				if (p.circle.contains(point)) {
+					// System.out.println(p);
+					p.place();
+					currentPlayer = players[playerIndex];
+					mode = 1;
+					if (playerIndex == 1)
+						playerIndex = 0;
+					else
+						playerIndex = 1;
+				}
 			}
+		} else if (mode == 1) {
+			for (BoardQuarter bq : board.getQuarters()) {
+				if (bq.box.contains(point)) {
+					bq.selected = true;
+					selected = bq;
+					mode = 2;
+				}
+			}
+		} else if (mode == 2) {
+			if(screenX<Gdx.graphics.getWidth()/2)
+				selected.rotate(1);
+			else
+				selected.rotate(-1);
+			mode = 0;
+			
 		}
 		return true;
 	}
