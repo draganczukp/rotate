@@ -53,7 +53,6 @@ public class BoardQuarter {
 	 *            > 0 rotates to the left, < - rotates to the right
 	 */
 	public void rotate(int dir) {
-		System.out.println(dir);
 		Piece[][] tmp = new Piece[3][3];
 		if (dir > 0) {
 			tmp[0][0] = pieces[2][0];
@@ -82,15 +81,13 @@ public class BoardQuarter {
 			tmp[2][1] = pieces[1][0];
 			tmp[2][2] = pieces[2][0];
 		}
-		tmp[0][0].c = Color.CYAN;
-//		System.out.println(Arrays.deepEquals(pieces, tmp));
 		pieces = tmp;
-//		System.out.println(Arrays.deepEquals(pieces, tmp));
 
 		for (int x = -1; x < 2; x++) {
 			for (int y = -1; y < 2; y++) {
 				Piece p = pieces[x+1][y+1];
 				p.pos.set(center.x + (x * offset), center.y - (y * offset));
+                p.circle.setPosition(p.pos);
 			}
 		}
 		selected = false;
