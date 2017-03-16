@@ -1,6 +1,8 @@
 package pl.killermenpl.board;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.Color;
+
 
 public class Board {
 
@@ -27,4 +29,66 @@ public class Board {
 		return new BoardQuarter[]{tl,tr,bl,br};
 	}
 	
+    public void checkWin(){
+           
+    }
+
+    public boolean checkDown(int x, int y, boolean left){
+        if(left){
+            if(y==0){
+                Piece[] ps = new Piece[]{tl.pieces[x][y],
+                    tl.pieces[x][y+1],
+                    tl.pieces[x][y+2],
+                    bl.pieces[x][y+0],
+                    bl.pieces[x][y+1]
+                };
+                Color c = ps[0];
+                for(int i = 1; i<5; i++){
+                    if(ps[i].c != c)
+                        return false;
+                }
+            }else{
+                Piece[] ps = new Piece[]{tl.pieces[x][y],
+                    tl.pieces[x][y+1],
+                    bl.pieces[x][y+0],
+                    bl.pieces[x][y+1],
+                    bl.pieces[x][y+2]
+                };
+                Color c = ps[0];
+                for(int i = 1; i<5; i++){
+                    if(ps[i].c != c)
+                        return false;
+                }
+            }
+        }else{
+            if(y==0){
+                Piece[] ps = new Piece[]{tr.pieces[x][y],
+                    tr.pieces[x][y+1],
+                    tr.pieces[x][y+2],
+                    br.pieces[x][y+0],
+                    br.pieces[x][y+1]
+                };
+                Color c = ps[0];
+                for(int i = 1; i<5; i++){
+                    if(ps[i].c != c)
+                        return false;
+                }
+            }else{
+                Piece[] ps = new Piece[]{tr.pieces[x][y],
+                    tr.pieces[x][y+1],
+                    br.pieces[x][y+0],
+                    br.pieces[x][y+1],
+                    br.pieces[x][y+2]
+                };
+                Color c = ps[0];
+                for(int i = 1; i<5; i++){
+                    if(ps[i].c != c)
+                        return false;
+                }
+            }
+
+        }
+
+        return false;
+    }
 }
