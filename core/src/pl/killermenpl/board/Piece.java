@@ -13,7 +13,9 @@ public class Piece {
 	public Circle circle;
 
 	public boolean placed;
-	
+
+	public static float r = 20;
+
 	public Piece(Vector2 pos){
 		this.pos = pos;
 		circle = new Circle(pos, 20);
@@ -21,7 +23,7 @@ public class Piece {
 	
 	public void draw(Graphics g){
 		g.sr.setColor(c);
-		g.sr.circle(pos.x, pos.y, 20);
+		g.sr.circle(pos.x, pos.y, r);
 	}
 	
 	public void place(){

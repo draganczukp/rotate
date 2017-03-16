@@ -11,20 +11,21 @@ public class BoardQuarter {
 	public Piece[][] pieces;
 
 	public Vector2 center;
-	public static float offset = 50;
+	public static float offset = 0;
 	public boolean selected = false;
 	public Rectangle box;
 
 	public BoardQuarter(Vector2 center) {
+
 		pieces = new Piece[3][3];
 		for (int x = -1; x < 2; x++) {
 			for (int y = -1; y < 2; y++) {
-				Piece p = new Piece(new Vector2(center.x + (x * offset), center.y - (y * offset)));
+				Piece p = new Piece(new Vector2(center.x + (x * offset*0.9f), center.y - (y * offset*0.9f)));
 				RotateGame.pieces.add(p);
 				pieces[x + 1][y + 1] = p;
 			}
 		}
-		box = new Rectangle(center.x - 2 * offset + 5, center.y - 2 * offset + 5, 4 * offset - 10, 4 * offset - 10);
+		box = new Rectangle(center.x - 1.65f * offset, center.y - 1.65f * offset , 3.3f * offset , 3.3f * offset );
 
 		
 		this.center = center;
