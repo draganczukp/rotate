@@ -106,7 +106,7 @@ public class RotateGame extends ApplicationAdapter implements InputProcessor {
 				}
 			}
 		} else if (mode == 2) {
-			if(screenX<Gdx.graphics.getWidth()/2)
+			if(screenX > Gdx.graphics.getWidth()/2)
 				selected.rotate(1);
 			else
 				selected.rotate(-1);
