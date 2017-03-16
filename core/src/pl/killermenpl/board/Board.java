@@ -29,32 +29,36 @@ public class Board {
 		return new BoardQuarter[]{tl,tr,bl,br};
 	}
 	
-    public void checkWin(){
-           
+    public boolean checkWin(){
+           return checkDown(0,0);
     }
 
-    public boolean checkDown(int x, int y, boolean left){
-        if(left){
+    public boolean checkDown(int x, int y){
+        if(x<3){
             if(y==0){
+                System.out.println("y0");
                 Piece[] ps = new Piece[]{tl.pieces[x][y],
                     tl.pieces[x][y+1],
                     tl.pieces[x][y+2],
                     bl.pieces[x][y+0],
                     bl.pieces[x][y+1]
                 };
-                Color c = ps[0];
+                Color c = ps[0].c;
                 for(int i = 1; i<5; i++){
-                    if(ps[i].c != c)
+                    if(ps[i].c != c){
+                        System.out.println(c.toString());
                         return false;
+                    }
                 }
             }else{
+                x-=3;
                 Piece[] ps = new Piece[]{tl.pieces[x][y],
                     tl.pieces[x][y+1],
                     bl.pieces[x][y+0],
                     bl.pieces[x][y+1],
                     bl.pieces[x][y+2]
                 };
-                Color c = ps[0];
+                Color c = ps[0].c;
                 for(int i = 1; i<5; i++){
                     if(ps[i].c != c)
                         return false;
@@ -68,7 +72,7 @@ public class Board {
                     br.pieces[x][y+0],
                     br.pieces[x][y+1]
                 };
-                Color c = ps[0];
+                Color c = ps[0].c;
                 for(int i = 1; i<5; i++){
                     if(ps[i].c != c)
                         return false;
@@ -80,7 +84,7 @@ public class Board {
                     br.pieces[x][y+1],
                     br.pieces[x][y+2]
                 };
-                Color c = ps[0];
+                Color c = ps[0].c;
                 for(int i = 1; i<5; i++){
                     if(ps[i].c != c)
                         return false;

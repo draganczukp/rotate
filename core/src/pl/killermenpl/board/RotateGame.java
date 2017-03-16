@@ -111,7 +111,11 @@ public class RotateGame extends ApplicationAdapter implements InputProcessor {
 			else
 				selected.rotate(-1);
 			mode = 0;
-			
+			if(board.checkWin()){
+                System.out.println("Win");
+            }else{
+                System.out.println("Nope");
+            }
 		}
 		return true;
 	}
