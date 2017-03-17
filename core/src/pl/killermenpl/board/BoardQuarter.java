@@ -87,7 +87,7 @@ public class BoardQuarter {
 		for (int x = -1; x < 2; x++) {
 			for (int y = -1; y < 2; y++) {
 				Piece p = pieces[x+1][y+1];
-				p.pos.set(center.x + (x * offset), center.y - (y * offset));
+				p.pos.set(center.x + (x * offset*0.9f), center.y - (y * offset*0.9f));
                 p.circle.setPosition(p.pos);
 			}
 		}
